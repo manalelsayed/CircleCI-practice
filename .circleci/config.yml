@@ -24,7 +24,7 @@ jobs:
       - checkout
       - run:
           name: "print world"
-          command: echo "text to output here" > ~/output.txt   
+          command: echo "text to output here" > output.txt   
       - persist_to_workspace:
           root: ~/
           paths:
@@ -40,14 +40,21 @@ jobs:
           at: ~/
       - run:
           name: "print world from workspace"
-          command: cat ~/output.txt
+          command: cat output.txt
 
   my_job:
     docker:
       - image: circleci/node:13.8.0
     steps:
       - print_pipeline_id        
-     
+  on_fail:
+    docker:
+      - image: circleci/node:13.8.0
+    steps:
+      - run:
+          name: Upload Failed Tests
+          command: curl --data fail_tests.log http://example.com/error_logs
+          when: on_fail
     
 
 # Invoke jobs via workflows
