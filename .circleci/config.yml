@@ -24,7 +24,7 @@ jobs:
       - checkout
       - run:
           name: "print world"
-          command: echo "text to output here" > output.txt   
+          command: echo "text to output here" > ~/output.txt   
       - persist_to_workspace:
           root: ~/
           paths:
@@ -40,7 +40,7 @@ jobs:
           at: ~/
       - run:
           name: "print world from workspace"
-          command: cat output.txt
+          command: cat ~/output.txt
 
   my_job:
     docker:
