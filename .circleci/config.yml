@@ -66,5 +66,6 @@ workflows:
       - print_output_file:
           requires:
             - save_hello_world_output    
-      - my_job        
+      - my_job     
+      - on_fail   
               
