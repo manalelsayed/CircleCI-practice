@@ -46,14 +46,10 @@ jobs:
     docker:
       - image: circleci/node:13.8.0
     steps:
-      - print_pipeline_id        
-  on_fail:
-    docker:
-      - image: circleci/node:13.8.0
-    steps:
+      - run: exit 1
       - run:
-          name: Upload Failed Tests
-          command: curl --data fail_tests.log http://example.com/error_logs
+          name: on error
+          command: echo "Hello Error!"
           when: on_fail
     
 
